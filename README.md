@@ -4,6 +4,7 @@
 A layout for verification and confirmation codes.  
 It uses native view elements.. and some magic :mage:
 
+![Sample1](https://github.com/AbuZaitoun/VerificationCode/blob/master/images/sample1.png)
 ## Gradle
 In build.gradle:
 ```
