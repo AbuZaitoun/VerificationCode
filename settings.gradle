@@ -1,0 +1,4 @@
+include ':VerificationCode'
+include ':app'
+include ':app', ':VerificationCode'
+rootProject.name = "VerificationCodeApp"
