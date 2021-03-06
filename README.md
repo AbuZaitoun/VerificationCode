@@ -11,7 +11,7 @@ allprojects {
   repositories {
     ...
     maven { url 'https://jitpack.io' }
-	}
+  }
 }
 ```
 Then add module to dependencies:
