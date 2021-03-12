@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.textfield.TextInputLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/place1"
+    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+    android:layout_width="50dp"
+    android:layout_height="match_parent"
+    android:layout_marginHorizontal="10dp"
+    android:layout_marginTop="20dp"
+    android:layout_marginBottom="10dp"
+    android:layout_weight="1"
+    app:boxCornerRadiusBottomEnd="@dimen/text_field_corner_radius"
+    app:boxCornerRadiusBottomStart="@dimen/text_field_corner_radius"
+    app:boxCornerRadiusTopEnd="@dimen/text_field_corner_radius"
+    app:boxCornerRadiusTopStart="@dimen/text_field_corner_radius"
+    app:boxStrokeColor="@color/outline_input_stroke_color"
+    app:boxStrokeWidth="3dp"
+    app:boxStrokeWidthFocused="3dp"
+    app:hintEnabled="false">
+
+    <com.abuzaitoun.verificationcode.DigitEditText
+        android:id="@+id/digit"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:inputType="numberDecimal"
+        android:maxLength="1"
+        android:textColor="@color/main_text"
+        android:textSize="24sp" />
+</com.google.android.material.textfield.TextInputLayout>
