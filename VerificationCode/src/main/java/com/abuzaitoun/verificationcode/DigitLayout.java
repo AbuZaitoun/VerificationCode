@@ -3,6 +3,7 @@ package com.abuzaitoun.verificationcode;
 import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
+import android.content.res.TypedArray;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
@@ -19,22 +20,32 @@ import java.util.ArrayList;
 
 public class DigitLayout extends LinearLayout {
     private ArrayList<DigitEditText> editTexts;
-    private int iterator = 0;
     private ClipboardManager clipboardManager;
     private Activity activity;
 
     public DigitLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
-        initComponents(context);
+        TypedArray arr = context.obtainStyledAttributes(attrs, R.styleable.DigitLayout);
+        int number_of_digit = arr.getInteger(R.styleable.DigitLayout_digits, 6);
+        initComponents(context, number_of_digit);
+
+        arr.recycle();
     }
 
     public void setActivity(Activity activity) {
         this.activity = activity;
     }
 
-    private void initComponents(Context context) {
+    private void initComponents(Context context, int number_of_digit) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        inflater.inflate(R.layout.digit_layout, this);
+        View view = inflater.inflate(R.layout.digit_layout, this);
+        LinearLayout linearLayout = view.findViewById(R.id.container);
+
+        for (int i = 0; i < number_of_digit; i++){
+            DigitEditText digitEditText = new DigitEditText(context);
+            linearLayout.addView(digitEditText);
+        }
+
         DigitEditText et1 = findViewById(R.id.digit1);
         DigitEditText et2 = findViewById(R.id.digit2);
         DigitEditText et3 = findViewById(R.id.digit3);

@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 
 import com.google.android.material.textfield.TextInputEditText;
 
-public class DigitEditText extends TextInputEditText {
+class DigitEditText extends TextInputEditText {
 
     public interface OnCutCopyPasteListener {
         void onCut();
