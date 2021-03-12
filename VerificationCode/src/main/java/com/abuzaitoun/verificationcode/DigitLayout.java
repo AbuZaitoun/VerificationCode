@@ -22,7 +22,7 @@ public class DigitLayout extends LinearLayout {
     private ArrayList<DigitEditText> editTexts;
     private ClipboardManager clipboardManager;
     private Activity activity;
-    private int index = 0;
+//    private int index = 0;
 
     public DigitLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
@@ -51,22 +51,22 @@ public class DigitLayout extends LinearLayout {
         }
 
 
-        for (DigitEditText editText: digitEditTexts){
-            editText.addTextChangedListener(new TextWatcherAdapter(){
+        for (int index = 0; index < digitEditTexts.size(); index++){
+            int finalIndex = index;
+            digitEditTexts.get(index).addTextChangedListener(new TextWatcherAdapter(){
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     if (i2 != 0) {
-                        if (index < digitEditTexts.size())
-                            digitEditTexts.get(index).clearFocus();
-                        if (index + 1 < digitEditTexts.size())
-                            digitEditTexts.get(index++).requestFocus();
+                        digitEditTexts.get(finalIndex).clearFocus();
+                        if (finalIndex + 1 < digitEditTexts.size()) {
+                            digitEditTexts.get(finalIndex + 1).requestFocus();
+                        }
                         else {
                             hideKeyboard(activity);
                         }
                     }
                 }
             });
-            index++;
         }
 
 //        et1.setOnCutCopyPasteListener(new DigitEditText.OnCutCopyPasteListener() {
