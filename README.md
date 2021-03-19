@@ -37,7 +37,7 @@ Java:
 `
 DigitLayout sixDigitLayout = findViewById(R.id.six_digit);
 `
-* Set number of digits:
+* Set number of digits:  
 Java:
 ```
 digitLayout.setNumberOfDigits(3);
