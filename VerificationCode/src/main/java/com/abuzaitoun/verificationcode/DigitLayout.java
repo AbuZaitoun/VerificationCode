@@ -12,6 +12,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.GridLayout;
 import android.widget.LinearLayout;
 
 import androidx.annotation.Nullable;
@@ -27,7 +28,7 @@ public class DigitLayout extends LinearLayout {
     public DigitLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         TypedArray arr = context.obtainStyledAttributes(attrs, R.styleable.DigitLayout);
-        numberOfDigits = arr.getInteger(R.styleable.DigitLayout_digits, 4);
+        numberOfDigits = arr.getInteger(R.styleable.DigitLayout_digits, 6);
         initComponents(context, numberOfDigits);
         arr.recycle();
     }
@@ -39,13 +40,14 @@ public class DigitLayout extends LinearLayout {
     private void initComponents(Context context, int numberOfDigits) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.digit_layout, this);
-        LinearLayout linearLayout = view.findViewById(R.id.container);
+        GridLayout gridLayout = view.findViewById(R.id.container);
+        gridLayout.removeAllViews();
 
         ArrayList<DigitEditText> digitEditTexts = new ArrayList<>();
 
         for (int i = 0; i < numberOfDigits; i++){
             DigitEditTextLayout digitEditTextLayout = new DigitEditTextLayout(context);
-            linearLayout.addView(digitEditTextLayout);
+            gridLayout.addView(digitEditTextLayout);
             digitEditTexts.add(digitEditTextLayout.getDigitEditText());
         }
 
