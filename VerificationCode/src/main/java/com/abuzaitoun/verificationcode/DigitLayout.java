@@ -4,8 +4,6 @@ import android.app.Activity;
 import android.content.ClipboardManager;
 import android.content.Context;
 import android.content.res.TypedArray;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -14,6 +12,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.GridLayout;
 import android.widget.LinearLayout;
+import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 
@@ -86,6 +85,9 @@ public class DigitLayout extends LinearLayout {
                             for (int i = 0; i < copiedText.length(); i++){
                                 editTexts.get(i).setText(Character.toString(copiedText.charAt(i)));
                             }
+                        }else {
+                            Toast.makeText(getContext(), "Copied text doesn't fit", Toast.LENGTH_SHORT).show();
+                            editTexts.get(finalIndex).setText("");
                         }
                     }
                 }
@@ -93,6 +95,10 @@ public class DigitLayout extends LinearLayout {
         }
     }
 
+    /**
+     * Method to return the verification code concatenated from all input fields
+     * @return The verification code as a string
+     */
     public String getCode(){
         StringBuilder to_return = new StringBuilder();
         for (EditText et: editTexts){
@@ -102,15 +108,16 @@ public class DigitLayout extends LinearLayout {
         return to_return.toString();
     }
 
+    /**
+     * Method to set clipboardManager, when set, onPaste() will be overridden allowing for pasting entire code
+     * on fields, which will distribute the characters on fields.
+     * @param clipboardManager System's clipboard manager: getSystemService(Context.CLIPBOARD_SERVICE)
+     */
     public void setClipboardManager(ClipboardManager clipboardManager) {
         this.clipboardManager = clipboardManager;
     }
 
-    public ArrayList<DigitEditText> getEditTexts() {
-        return editTexts;
-    }
-
-    public void hideKeyboard(Activity activity) {
+    private void hideKeyboard(Activity activity) {
         if (activity == null) return;
         View view = activity.getCurrentFocus();
         if (view != null) {
@@ -121,6 +128,11 @@ public class DigitLayout extends LinearLayout {
         }
     }
 
+    /**
+     * User to set the number of digits for verification code, if numberOfDigits was greater than 6,
+     * the layout will shift to a new line
+     * @param numberOfDigits Number of digits for verification code
+     */
     public void setNumberOfDigits(int numberOfDigits){
         this.numberOfDigits = numberOfDigits;
         initComponents(getContext(), numberOfDigits);
