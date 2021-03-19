@@ -14,5 +14,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         DigitLayout digitLayout = findViewById(R.id.my_layout);
         digitLayout.setActivity(this);
+        digitLayout.setNumberOfDigits(3);
     }
 }

@@ -22,14 +22,13 @@ public class DigitLayout extends LinearLayout {
     private ArrayList<DigitEditText> editTexts;
     private ClipboardManager clipboardManager;
     private Activity activity;
-//    private int index = 0;
+    private int numberOfDigits;
 
     public DigitLayout(Context context, @Nullable AttributeSet attrs) {
         super(context, attrs);
         TypedArray arr = context.obtainStyledAttributes(attrs, R.styleable.DigitLayout);
-        int number_of_digit = arr.getInteger(R.styleable.DigitLayout_digits, 6);
-        initComponents(context, number_of_digit);
-
+        numberOfDigits = arr.getInteger(R.styleable.DigitLayout_digits, 4);
+        initComponents(context, numberOfDigits);
         arr.recycle();
     }
 
@@ -37,19 +36,18 @@ public class DigitLayout extends LinearLayout {
         this.activity = activity;
     }
 
-    private void initComponents(Context context, int number_of_digit) {
+    private void initComponents(Context context, int numberOfDigits) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.digit_layout, this);
         LinearLayout linearLayout = view.findViewById(R.id.container);
 
         ArrayList<DigitEditText> digitEditTexts = new ArrayList<>();
 
-        for (int i = 0; i < number_of_digit; i++){
+        for (int i = 0; i < numberOfDigits; i++){
             DigitEditTextLayout digitEditTextLayout = new DigitEditTextLayout(context);
             linearLayout.addView(digitEditTextLayout);
             digitEditTexts.add(digitEditTextLayout.getDigitEditText());
         }
-
 
         for (int index = 0; index < digitEditTexts.size(); index++){
             int finalIndex = index;
@@ -115,7 +113,7 @@ public class DigitLayout extends LinearLayout {
         return editTexts;
     }
 
-    public static void hideKeyboard(Activity activity) {
+    public void hideKeyboard(Activity activity) {
         if (activity == null) return;
         View view = activity.getCurrentFocus();
         if (view != null) {
@@ -124,5 +122,10 @@ public class DigitLayout extends LinearLayout {
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
         }
+    }
+
+    public void setNumberOfDigits(int numberOfDigits){
+        this.numberOfDigits = numberOfDigits;
+        initComponents(getContext(), numberOfDigits);
     }
 }
