@@ -67,37 +67,32 @@ public class DigitLayout extends LinearLayout {
                     }
                 }
             });
+            editTexts.get(index).setOnCutCopyPasteListener(new DigitEditText.OnCutCopyPasteListener() {
+                @Override
+                public void onCut() {
+
+                }
+
+                @Override
+                public void onCopy() {
+
+                }
+
+                @Override
+                public void onPaste() {
+                    if (clipboardManager != null && clipboardManager.hasPrimaryClip()){
+                        String copiedText = clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
+                        if (copiedText.length() == numberOfDigits){
+                            for (int i = 0; i < copiedText.length(); i++){
+                                editTexts.get(i).setText(Character.toString(copiedText.charAt(i)));
+                            }
+                        }
+                    }
+                }
+            });
         }
-
-//        et1.setOnCutCopyPasteListener(new DigitEditText.OnCutCopyPasteListener() {
-//            @Override
-//            public void onCut() {
-//
-//            }
-//
-//            @Override
-//            public void onCopy() {
-//
-//            }
-//
-//            @Override
-//            public void onPaste() {
-//                if (clipboardManager.hasPrimaryClip()){
-//                    Log.i("CLIP", clipboardManager.getPrimaryClip().getItemAt(0).getText().toString());
-//                    String copied_text = clipboardManager.getPrimaryClip().getItemAt(0).getText().toString();
-//                    if (copied_text.length()==6) {
-//                        et1.setText(Character.toString(copied_text.charAt(0)));
-//                        et2.setText(Character.toString(copied_text.charAt(1)));
-//                        et3.setText(Character.toString(copied_text.charAt(2)));
-//                        et4.setText(Character.toString(copied_text.charAt(3)));
-//                        et5.setText(Character.toString(copied_text.charAt(4)));
-//                        et6.setText(Character.toString(copied_text.charAt(5)));
-//                    }
-//                }
-//            }
-//        });
-
     }
+
     public String getCode(){
         StringBuilder to_return = new StringBuilder();
         for (EditText et: editTexts){
