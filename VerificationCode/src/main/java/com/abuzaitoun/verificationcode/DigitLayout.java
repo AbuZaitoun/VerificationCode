@@ -40,26 +40,26 @@ public class DigitLayout extends LinearLayout {
     private void initComponents(Context context, int numberOfDigits) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View view = inflater.inflate(R.layout.digit_layout, this);
+        editTexts = new ArrayList<>();
+
         GridLayout gridLayout = view.findViewById(R.id.container);
         gridLayout.removeAllViews();
-
-        ArrayList<DigitEditText> digitEditTexts = new ArrayList<>();
 
         for (int i = 0; i < numberOfDigits; i++){
             DigitEditTextLayout digitEditTextLayout = new DigitEditTextLayout(context);
             gridLayout.addView(digitEditTextLayout);
-            digitEditTexts.add(digitEditTextLayout.getDigitEditText());
+            editTexts.add(digitEditTextLayout.getDigitEditText());
         }
 
-        for (int index = 0; index < digitEditTexts.size(); index++){
+        for (int index = 0; index < editTexts.size(); index++){
             int finalIndex = index;
-            digitEditTexts.get(index).addTextChangedListener(new TextWatcherAdapter(){
+            editTexts.get(index).addTextChangedListener(new TextWatcherAdapter(){
                 @Override
                 public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
                     if (i2 != 0) {
-                        digitEditTexts.get(finalIndex).clearFocus();
-                        if (finalIndex + 1 < digitEditTexts.size()) {
-                            digitEditTexts.get(finalIndex + 1).requestFocus();
+                        editTexts.get(finalIndex).clearFocus();
+                        if (finalIndex + 1 < editTexts.size()) {
+                            editTexts.get(finalIndex + 1).requestFocus();
                         }
                         else {
                             hideKeyboard(activity);
