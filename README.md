@@ -37,6 +37,17 @@ Java:
 `
 DigitLayout sixDigitLayout = findViewById(R.id.six_digit);
 `
+* Set number of digits:
+Java:
+```
+digitLayout.setNumberOfDigits(3);
+```
+XML: 
+```
+<com.abuzaitoun.verificationcode.DigitLayout
+        ...
+        app:digits="4"/>
+```
 * Get code from layout:
 ```
 String code = sixDigitLayout.getCode();
@@ -47,6 +58,7 @@ sixDigitLayout.setActivity(getActivity());
 ClipboardManager clipboardManager = (ClipboardManager)getActivity().getSystemService(Context.CLIPBOARD_SERVICE);
 sixDigitLayout.setClipboardManager(clipboardManager);     
 ```
+Paste call works from any EditText, the copied string will be distributed on all digits if the copied text's length matches the number of digits.
 * More features and customizations will be added soon.
 
 ## License
