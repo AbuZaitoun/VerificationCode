@@ -19,7 +19,7 @@ Then add module to dependencies:
 ```
 dependencies {  
   ...
-  implementation 'com.github.AbuZaitoun:VerificationCode:Tag'  
+  implementation 'com.github.AbuZaitoun:VerificationCode:0.2'  
 }
 ```
 ## Usage
